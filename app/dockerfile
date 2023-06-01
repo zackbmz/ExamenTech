@@ -1,0 +1,16 @@
+FROM python:3.10-alpine
+
+#Spécifie le réperoire de travail 
+WORKDIR /app
+
+#Intsallation de nos paquets
+RUN pip install pymongo pydantic fastapi uvicorn
+
+#Copie du répertoire courant dans le répertoire de travail 
+COPY . .
+
+#le conteneur écoute sur le port 4850
+EXPOSE 4850
+
+#lancement du serveur uvicorn
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "4850"]
